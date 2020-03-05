@@ -35,16 +35,17 @@ class _DemoCreditCardState extends State<DemoCreditCard> {
           Container(
             margin: EdgeInsets.all(40.0),
             child: DilettaCreditCard(
-              number: '',
+              number: '4',
               holderName: '',
               expiryDate: '',
               cvv: '',
-              isCvvFocused: false
+              isCvvFocused: true
             ),
           ),
           _getNumberField(),
           _getHolderNameField(),
-          _getExpiryDateField()
+          _getExpiryDateField(),
+          _getCvvField()
         ],
       ),
     );
@@ -85,6 +86,19 @@ class _DemoCreditCardState extends State<DemoCreditCard> {
         ),
         keyboardType: TextInputType.number,
         controller: CreditCardService().expiryDateController,
+      ),
+    );
+  }
+
+  Widget _getCvvField() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 40.0),
+      child: TextFormField(
+        decoration: InputDecoration(
+          labelText: 'CVV'
+        ),
+        keyboardType: TextInputType.number,
+        controller: CreditCardService().cvvController,
       ),
     );
   }

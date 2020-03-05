@@ -4,6 +4,8 @@ class Consts {
 
   Consts._();
 
+  static const double WIDTH = 250.0;
+
   static const LinearGradient CARD_COLOR = LinearGradient(
     colors: [
       Color(0xffffffff), 
