@@ -184,7 +184,7 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(4.0),
             child: Image.asset(
-              'assets/master.png',
+              'lib/assets/master.png',
               width: size(40.0),
               height: size(30.0),
               fit: BoxFit.fitWidth,
@@ -203,7 +203,7 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(4.0),
             child: Image.asset(
-              'assets/visa.png',
+              'lib/assets/visa.png',
               width: size(40.0),
               height: size(30.0),
               fit: BoxFit.fitWidth,
