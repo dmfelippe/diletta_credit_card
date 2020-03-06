@@ -188,6 +188,7 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> {
               width: size(40.0),
               height: size(30.0),
               fit: BoxFit.fitWidth,
+              package: 'diletta_credit_card'
             ),
           ),
         );
@@ -206,6 +207,7 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> {
               width: size(40.0),
               height: size(30.0),
               fit: BoxFit.fitWidth,
+              package: 'diletta_credit_card'
             ),
           ),
         );
