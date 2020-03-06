@@ -1,8 +1,8 @@
-import 'package:diletta_credit_card/src/validations.dart';
 import 'package:flutter/material.dart';
 import 'consts.dart';
 import 'enums.dart';
 import 'creditCardService.dart';
+import 'validations.dart';
 
 class DilettaCreditCard extends StatefulWidget {
   final String number;
@@ -184,11 +184,11 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(4.0),
             child: Image.asset(
-              'lib/assets/master.png',
+              'assets/master.png',
+              package: 'diletta_credit_card',
               width: size(40.0),
               height: size(30.0),
-              fit: BoxFit.fitWidth,
-              package: 'diletta_credit_card'
+              fit: BoxFit.fitWidth
             ),
           ),
         );
@@ -203,11 +203,11 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(4.0),
             child: Image.asset(
-              'lib/assets/visa.png',
+              'assets/visa.png',
+              package: 'diletta_credit_card',
               width: size(40.0),
               height: size(30.0),
-              fit: BoxFit.fitWidth,
-              package: 'diletta_credit_card'
+              fit: BoxFit.fitWidth
             ),
           ),
         );
