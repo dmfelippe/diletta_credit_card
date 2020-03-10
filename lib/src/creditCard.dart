@@ -48,7 +48,9 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> {
     _creditCardService.setControllers(
       number: _number,
       holderName: _holderName,
-      expiryDate: _expiryDate
+      expiryDate: _expiryDate,
+      cvv: _cvv,
+      cardColor: _getCardColor()
     );
 
     _brand = Validations.getCreditCardBrand(_number);
@@ -57,6 +59,7 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> {
       setState(() {
         _number = _creditCardService.numberController.text;
         _brand = Validations.getCreditCardBrand(_number);
+        _creditCardService.setCardBrandAndColor(_brand.toString(), _getCardColor());
       });
     });
 
