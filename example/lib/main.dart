@@ -35,17 +35,16 @@ class _DemoCreditCardState extends State<DemoCreditCard> {
           Container(
             margin: EdgeInsets.all(40.0),
             child: DilettaCreditCard(
-              number: '4',
+              number: '',
               holderName: '',
               expiryDate: '',
               cvv: '',
-              isCvvFocused: true
             ),
           ),
           _getNumberField(),
           _getHolderNameField(),
           _getExpiryDateField(),
-          _getCvvField()
+          _getCvvField(),
         ],
       ),
     );

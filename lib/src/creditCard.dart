@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'consts.dart';
 import 'enums.dart';
@@ -9,14 +11,12 @@ class DilettaCreditCard extends StatefulWidget {
   final String holderName;
   final String expiryDate;
   final String cvv;
-  final bool isCvvFocused;
 
   DilettaCreditCard({
     @required this.number,
     @required this.holderName,
     @required this.expiryDate,
     @required this.cvv,
-    @required this.isCvvFocused
   });
 
   @override
@@ -24,14 +24,15 @@ class DilettaCreditCard extends StatefulWidget {
 }
 
 class _DilettaCreditCardState extends State<DilettaCreditCard> {
+  bool _isCvvFocused;
   String _number;
   String _holderName;
   String _expiryDate;
   String _cvv;
-  bool _isCvvFocused;
   CreditCardBrand _brand;
   CreditCardService _creditCardService;
 
+  StreamSubscription _subscription;
   double _percentage;
 
   @override
@@ -42,7 +43,7 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> {
     _holderName = widget.holderName;
     _expiryDate = widget.expiryDate;
     _cvv = widget.cvv;
-    _isCvvFocused = widget.isCvvFocused;
+    _isCvvFocused = false;
     _brand = CreditCardBrand.NONE;
     _creditCardService = CreditCardService();
     _creditCardService.setControllers(
@@ -80,6 +81,18 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> {
         _cvv = _creditCardService.cvvController.text;
       });
     });
+
+    _subscription = _creditCardService.cvv.listen((data) {
+      setState(() {
+        _isCvvFocused = !_isCvvFocused;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _subscription.cancel();
   }
 
   @override

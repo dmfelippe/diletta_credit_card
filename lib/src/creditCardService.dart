@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_masked_text/flutter_masked_text.dart';
@@ -11,6 +13,7 @@ class CreditCardService {
   TextEditingController _cvvController;
   String _brand;
   LinearGradient _cardColor;
+  StreamController _cvvStream;
 
   factory CreditCardService() {
     _instance ??= CreditCardService._internal();
@@ -22,6 +25,7 @@ class CreditCardService {
     _holderNameController = TextEditingController();
     _expiryDateController = MaskedTextController(mask: '00/00');
     _cvvController = MaskedTextController(mask: '000');
+    _cvvStream = StreamController.broadcast();
   }
 
   void setControllers({String number, String holderName, String expiryDate, String cvv, LinearGradient cardColor}) {
@@ -38,10 +42,19 @@ class CreditCardService {
     _cardColor = color;
   }
 
+  void cvvStreamDispose() {
+    _cvvStream.close();
+  }
+
+  void changeCvv() {
+    _cvvStream.add(true);
+  }
+
   TextEditingController get numberController => _numberController;
   TextEditingController get holderNameController => _holderNameController;
   TextEditingController get expiryDateController => _expiryDateController;
   TextEditingController get cvvController => _cvvController;
   String get cardBrand => _brand;
   LinearGradient get cardColor => _cardColor;
+  Stream get cvv => _cvvStream.stream;
 }
