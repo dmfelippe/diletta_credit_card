@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:diletta_credit_card/src/enums.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_masked_text/flutter_masked_text.dart';
@@ -11,7 +12,7 @@ class CreditCardService {
   TextEditingController _holderNameController;
   TextEditingController _expiryDateController;
   TextEditingController _cvvController;
-  String _brand;
+  CreditCardBrand _brand;
   LinearGradient _cardColor;
   StreamController _cvvStream;
 
@@ -33,11 +34,11 @@ class CreditCardService {
     _holderNameController = TextEditingController(text: holderName);
     _expiryDateController = MaskedTextController(mask: '00/00', text: expiryDate);
     _cvvController = MaskedTextController(mask: '000', text: cvv);
-    _brand = '';
+    _brand = CreditCardBrand.NONE;
     _cardColor = cardColor;
   }
 
-  void setCardBrandAndColor(String brand, LinearGradient color) {
+  void setCardBrandAndColor(CreditCardBrand brand, LinearGradient color) {
     _brand = brand;
     _cardColor = color;
   }
@@ -54,7 +55,20 @@ class CreditCardService {
   TextEditingController get holderNameController => _holderNameController;
   TextEditingController get expiryDateController => _expiryDateController;
   TextEditingController get cvvController => _cvvController;
-  String get cardBrand => _brand;
+  String get cardBrand {
+    switch(_brand) {
+      case CreditCardBrand.VISA:
+        return 'VISA';
+      case CreditCardBrand.MASTERCARD:
+        return 'MASTER';
+      case CreditCardBrand.INVALID:
+        return '';
+      case CreditCardBrand.NONE: 
+        return '';
+      default:
+        return '';
+    }
+  }
   LinearGradient get cardColor => _cardColor;
   Stream get cvv => _cvvStream.stream;
 }

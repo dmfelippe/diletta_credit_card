@@ -60,7 +60,7 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> {
       setState(() {
         _number = _creditCardService.numberController.text;
         _brand = Validations.getCreditCardBrand(_number);
-        _creditCardService.setCardBrandAndColor(_brand.toString(), _getCardColor());
+        _creditCardService.setCardBrandAndColor(_brand, _getCardColor());
       });
     });
 
