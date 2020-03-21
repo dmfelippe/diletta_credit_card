@@ -40,7 +40,7 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> {
     super.initState();
 
     _number = widget.number;
-    _holderName = widget.holderName;
+    _holderName = widget.holderName.toUpperCase();
     _expiryDate = widget.expiryDate;
     _cvv = widget.cvv;
     _isCvvFocused = false;
