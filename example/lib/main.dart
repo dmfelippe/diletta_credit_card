@@ -22,6 +22,11 @@ class DemoCreditCard extends StatefulWidget {
 }
 
 class _DemoCreditCardState extends State<DemoCreditCard> {
+  @override
+  void initState() {
+    super.initState();
+    //Future.delayed(Duration(milliseconds: 500), () {setState(() {});});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +50,7 @@ class _DemoCreditCardState extends State<DemoCreditCard> {
           _getHolderNameField(),
           _getExpiryDateField(),
           _getCvvField(),
+          _cvv()
         ],
       ),
     );
@@ -99,6 +105,15 @@ class _DemoCreditCardState extends State<DemoCreditCard> {
         keyboardType: TextInputType.number,
         controller: CreditCardService().cvvController,
       ),
+    );
+  }
+
+  Widget _cvv() {
+    return InkWell(
+      onTap: () {
+        CreditCardService().changeCvv();
+      },
+      child: Container(width: 200.0, height: 40.0, color: Colors.amber),
     );
   }
 }

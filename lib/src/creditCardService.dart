@@ -30,10 +30,10 @@ class CreditCardService {
   }
 
   void setControllers({String number, String holderName, String expiryDate, String cvv, LinearGradient cardColor}) {
-    _numberController = MaskedTextController(mask: '0000 0000 0000 0000', text: number);
-    _holderNameController = TextEditingController(text: holderName);
-    _expiryDateController = MaskedTextController(mask: '00/00', text: expiryDate);
-    _cvvController = MaskedTextController(mask: '000', text: cvv);
+    _numberController.text = number;
+    _holderNameController.text = holderName;
+    _expiryDateController.text = expiryDate;
+    _cvvController.text = cvv;
     _brand = CreditCardBrand.NONE;
     _cardColor = cardColor;
   }
