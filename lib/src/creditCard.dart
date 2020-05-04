@@ -395,7 +395,10 @@ class _DilettaCreditCardState extends State<DilettaCreditCard>
                     text: text.length < pattern.length
                         ? pattern.substring(text.length)
                         : '',
-                    style: TextStyle(color: Colors.white))
+                    style: TextStyle(
+                        color: _number.length > 0
+                            ? Colors.white
+                            : Color(0xff908e8e)))
               ]),
         ));
   }
