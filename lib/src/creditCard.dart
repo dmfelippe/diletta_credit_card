@@ -14,19 +14,19 @@ class DilettaCreditCard extends StatefulWidget {
   final String cvv;
   final int animationDuration;
 
-  DilettaCreditCard({
-    @required this.number,
-    @required this.holderName,
-    @required this.expiryDate,
-    @required this.cvv,
-    this.animationDuration = 1000
-  });
+  DilettaCreditCard(
+      {@required this.number,
+      @required this.holderName,
+      @required this.expiryDate,
+      @required this.cvv,
+      this.animationDuration = 1000});
 
   @override
   State<StatefulWidget> createState() => _DilettaCreditCardState();
 }
 
-class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTickerProviderStateMixin {
+class _DilettaCreditCardState extends State<DilettaCreditCard>
+    with SingleTickerProviderStateMixin {
   bool _isCvvFocused;
   String _number;
   String _holderName;
@@ -53,16 +53,17 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
     _brand = CreditCardBrand.NONE;
     _creditCardService = CreditCardService();
     _creditCardService.setControllers(
-      number: _number,
-      holderName: _holderName,
-      expiryDate: _expiryDate,
-      cvv: _cvv,
-      cardColor: _getCardColor()
-    );
+        number: _number,
+        holderName: _holderName,
+        expiryDate: _expiryDate,
+        cvv: _cvv,
+        cardColor: _getCardColor());
 
     _brand = Validations.getCreditCardBrand(_number);
 
-    _animationController = AnimationController(duration: Duration(milliseconds: widget.animationDuration), vsync: this);
+    _animationController = AnimationController(
+        duration: Duration(milliseconds: widget.animationDuration),
+        vsync: this);
 
     _frontCardRotation = TweenSequence<double>(
       <TweenSequenceItem<double>>[
@@ -102,7 +103,8 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
 
     _creditCardService.holderNameController.addListener(() {
       setState(() {
-        _holderName = _creditCardService.holderNameController.text.toUpperCase();
+        _holderName =
+            _creditCardService.holderNameController.text.toUpperCase();
       });
     });
 
@@ -145,22 +147,17 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
       _animationController.reverse();
 
     return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        setResponsive(constraints);
-        return Stack(
-          children: [
-            AnimationCard(
-              animation: _frontCardRotation,
-              child: _getFrontCard(constraints)
-            ),
-            AnimationCard(
-              animation: _backCardRotation,
-              child: _getBackCard(constraints)
-            )
-          ],
-        );
-      }
-    );
+        builder: (BuildContext context, BoxConstraints constraints) {
+      setResponsive(constraints);
+      return Stack(
+        children: [
+          AnimationCard(
+              animation: _frontCardRotation, child: _getFrontCard(constraints)),
+          AnimationCard(
+              animation: _backCardRotation, child: _getBackCard(constraints))
+        ],
+      );
+    });
   }
 
   Widget _getFrontCard(BoxConstraints constraints) {
@@ -169,40 +166,31 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
       height: constraints.maxWidth * 0.65,
       padding: EdgeInsets.only(top: size(20.0)),
       decoration: BoxDecoration(
-        gradient: _getCardColor(),
-        borderRadius: BorderRadius.circular(12.0)
-      ),
+          gradient: _getCardColor(), borderRadius: BorderRadius.circular(12.0)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
-        children: [
-          _getCardBrand(),
-          _getCardNumber(),
-          _getInfo()
-        ],
+        children: [_getCardBrand(), _getCardNumber(), _getInfo()],
       ),
     );
   }
 
   Widget _getBackCard(BoxConstraints constraints) {
     return Container(
-      width: constraints.maxWidth,
-      height: constraints.maxWidth * 0.65,
-      padding: EdgeInsets.only(top: size(28.0)),
-      decoration: BoxDecoration(
-        gradient: _getCardColor(),
-        borderRadius: BorderRadius.circular(12.0)
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _getBlackStripe(),
-          _getCvvContainer(),
-          _getCardBrand()
-        ]
-      )
-    );
+        width: constraints.maxWidth,
+        height: constraints.maxWidth * 0.65,
+        padding: EdgeInsets.only(top: size(28.0)),
+        decoration: BoxDecoration(
+            gradient: _getCardColor(),
+            borderRadius: BorderRadius.circular(12.0)),
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _getBlackStripe(),
+              _getCvvContainer(),
+              _getCardBrand()
+            ]));
   }
 
   LinearGradient _getCardColor() {
@@ -233,9 +221,8 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
           width: size(40.0),
           height: size(30.0),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4.0),
-            color: Color(0xffeaebef)
-          ),
+              borderRadius: BorderRadius.circular(4.0),
+              color: Color(0xffeaebef)),
         );
         break;
       case CreditCardBrand.INVALID:
@@ -243,9 +230,8 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
           width: size(40.0),
           height: size(30.0),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4.0),
-            color: Color(0xffcc0000)
-          ),
+              borderRadius: BorderRadius.circular(4.0),
+              color: Color(0xffcc0000)),
         );
         break;
       case CreditCardBrand.MASTERCARD:
@@ -257,13 +243,11 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(4.0),
-            child: Image.asset(
-              'assets/images/master.png',
-              package: 'diletta_credit_card',
-              width: size(40.0),
-              height: size(30.0),
-              fit: BoxFit.fitWidth
-            ),
+            child: Image.asset('assets/images/master.png',
+                package: 'diletta_credit_card',
+                width: size(40.0),
+                height: size(30.0),
+                fit: BoxFit.fitWidth),
           ),
         );
         break;
@@ -276,13 +260,11 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(4.0),
-            child: Image.asset(
-              'assets/images/visa.png',
-              package: 'diletta_credit_card',
-              width: size(40.0),
-              height: size(30.0),
-              fit: BoxFit.fitWidth
-            ),
+            child: Image.asset('assets/images/visa.png',
+                package: 'diletta_credit_card',
+                width: size(40.0),
+                height: size(30.0),
+                fit: BoxFit.fitWidth),
           ),
         );
         break;
@@ -291,34 +273,29 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
           width: size(40.0),
           height: size(30.0),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(4.0),
-            color: Color(0xffeaebef)
-          ),
+              borderRadius: BorderRadius.circular(4.0),
+              color: Color(0xffeaebef)),
         );
         break;
     }
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        container,
-        Container(width: size(20.0))
-      ]
-    );
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [container, Container(width: size(20.0))]);
   }
 
   Widget _getCardNumber() => Container(
-    margin: EdgeInsets.fromLTRB(size(24.0), size(28.0), size(24.0), size(20.0)),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        _getNumberGroup(0),
-        _getNumberGroup(5),
-        _getNumberGroup(10),
-        _getNumberGroup(15)
-      ]
-    ),
-  );
+        margin:
+            EdgeInsets.fromLTRB(size(24.0), size(28.0), size(24.0), size(20.0)),
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _getNumberGroup(0),
+              _getNumberGroup(5),
+              _getNumberGroup(10),
+              _getNumberGroup(15)
+            ]),
+      );
 
   //Cada grupo é formado por 4 dígitos
   Widget _getNumberGroup(int index) {
@@ -336,11 +313,10 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
           child: Text(
             _number[index],
             style: TextStyle(
-              fontFamily: 'ocra',
-              package: 'diletta_credit_card',
-              fontSize: size(14.0),
-              color: Colors.white
-            ),
+                fontFamily: 'ocra',
+                package: 'diletta_credit_card',
+                fontSize: size(14.0),
+                color: Colors.white),
           ),
         ));
       } else {
@@ -352,28 +328,22 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
             width: size(6.0),
             height: size(6.0),
             decoration: BoxDecoration(
-              color: Color(0xffc6c5c5),
-              borderRadius: BorderRadius.circular(90)
-            ),
+                color: _number.length > 0 ? Colors.white : Color(0xffc6c5c5),
+                borderRadius: BorderRadius.circular(90)),
           ),
         ));
       }
       margin = true;
       index++;
     }
-    return Row(
-      children: digits
-    );
+    return Row(children: digits);
   }
 
   Widget _getInfo() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: size(24.0)),
       child: Row(
-        children: [
-          _getName(),
-          _getExpiry()
-        ],
+        children: [_getName(), _getExpiry()],
       ),
     );
   }
@@ -385,30 +355,24 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
       name = Text(
         'NOME E SOBRENOME',
         style: TextStyle(
-          fontFamily: 'ocra',
-          package: 'diletta_credit_card',
-          fontSize: size(11.0),
-          color: Color(0xff908e8e)
-        ),
+            fontFamily: 'ocra',
+            package: 'diletta_credit_card',
+            fontSize: size(11.0),
+            color: _number.length > 0 ? Colors.white : Color(0xff908e8e)),
       );
     } else {
-      name = Text(
-        _holderName,
-        style: TextStyle(
-          fontFamily: 'ocra',
-          package: 'diletta_credit_card',
-          fontSize: size(11.0),
-          color: _number.length > 0 ? Colors.white : Color(0xff3f3f3f),
-        ),
-        overflow: TextOverflow.ellipsis
-      );
+      name = Text(_holderName,
+          style: TextStyle(
+            fontFamily: 'ocra',
+            package: 'diletta_credit_card',
+            fontSize: size(11.0),
+            color: Colors.white,
+          ),
+          overflow: TextOverflow.ellipsis);
     }
 
     return Expanded(
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        child: name
-      ),
+      child: Container(width: MediaQuery.of(context).size.width, child: name),
     );
   }
 
@@ -417,27 +381,23 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
     String text = _expiryDate;
 
     return Container(
-      margin: EdgeInsets.only(left: size(10.0)),
-      child: RichText(
-        text: TextSpan(
-          text: text,
-          style: TextStyle(
-            fontFamily: 'ocra',
-            package: 'diletta_credit_card',
-            fontSize: size(12.0),
-            color: _number.length > 0 ? Colors.white : Color(0xff3f3f3f)
-          ),
-          children: [
-            TextSpan(
-              text: text.length < pattern.length  ? pattern.substring(text.length) : '',
+        margin: EdgeInsets.only(left: size(10.0)),
+        child: RichText(
+          text: TextSpan(
+              text: text,
               style: TextStyle(
-                color: Color(0xff908e8e)
-              )
-            )
-          ]
-        ),
-      )
-    );
+                  fontFamily: 'ocra',
+                  package: 'diletta_credit_card',
+                  fontSize: size(12.0),
+                  color: _number.length > 0 ? Colors.white : Color(0xff3f3f3f)),
+              children: [
+                TextSpan(
+                    text: text.length < pattern.length
+                        ? pattern.substring(text.length)
+                        : '',
+                    style: TextStyle(color: Colors.white))
+              ]),
+        ));
   }
 
   Widget _getBlackStripe() {
@@ -450,41 +410,38 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
 
   Widget _getCvvContainer() {
     return Container(
-      margin: EdgeInsets.fromLTRB(size(34.0), size(16.0), size(56.0), size(24.0)),
+      margin:
+          EdgeInsets.fromLTRB(size(34.0), size(16.0), size(56.0), size(24.0)),
       width: MediaQuery.of(context).size.width,
-      child: Stack(
-        children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Container(
-                width: size(124.0),
-                height: size(6.0),
-                color: Color(0xff898b8d),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: size(6.0)),
-                width: size(124.0),
-                height: size(6.0),
-                color: Color(0xff898b8d),
-              )
-            ],
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Container(
-              alignment: Alignment.center,
-              width: size(45.0),
-              height: size(28.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(6)
-              ),
-              child: _getCvv(),
+      child: Stack(children: [
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: size(124.0),
+              height: size(6.0),
+              color: Color(0xff898b8d),
             ),
-          )
-        ]
-      ),
+            Container(
+              margin: EdgeInsets.only(top: size(6.0)),
+              width: size(124.0),
+              height: size(6.0),
+              color: Color(0xff898b8d),
+            )
+          ],
+        ),
+        Align(
+          alignment: Alignment.topRight,
+          child: Container(
+            alignment: Alignment.center,
+            width: size(45.0),
+            height: size(28.0),
+            decoration: BoxDecoration(
+                color: Colors.white, borderRadius: BorderRadius.circular(6)),
+            child: _getCvv(),
+          ),
+        )
+      ]),
     );
   }
 
@@ -501,11 +458,10 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
           child: Text(
             _cvv[index],
             style: TextStyle(
-              fontFamily: 'ocra',
-              package: 'diletta_credit_card',
-              fontSize: size(14.0),
-              color: Color(0xff3f3f3f)
-            ),
+                fontFamily: 'ocra',
+                package: 'diletta_credit_card',
+                fontSize: size(14.0),
+                color: Color(0xff3f3f3f)),
           ),
         ));
       } else {
@@ -517,23 +473,19 @@ class _DilettaCreditCardState extends State<DilettaCreditCard> with SingleTicker
             width: size(6.0),
             height: size(6.0),
             decoration: BoxDecoration(
-              color: Color(0xffc6c5c5),
-              borderRadius: BorderRadius.circular(90)
-            ),
+                color: Color(0xffc6c5c5),
+                borderRadius: BorderRadius.circular(90)),
           ),
         ));
       }
       margin = true;
     }
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: cvv
-    );
+    return Row(mainAxisAlignment: MainAxisAlignment.center, children: cvv);
   }
 
   void setResponsive(BoxConstraints constraints) {
     if (_percentage == null) {
-      _percentage =  constraints.maxWidth / Consts.WIDTH;
+      _percentage = constraints.maxWidth / Consts.WIDTH;
     }
   }
 
