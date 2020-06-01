@@ -315,7 +315,7 @@ class _DilettaCreditCardState extends State<DilettaCreditCard>
             style: TextStyle(
                 fontFamily: 'ocra',
                 package: 'diletta_credit_card',
-                fontSize: size(14.0),
+                fontSize: size(15.0),
                 color: Colors.white),
           ),
         ));
@@ -357,7 +357,7 @@ class _DilettaCreditCardState extends State<DilettaCreditCard>
         style: TextStyle(
             fontFamily: 'ocra',
             package: 'diletta_credit_card',
-            fontSize: size(11.0),
+            fontSize: size(12.0),
             color: _number.length > 0 ? Colors.white : Color(0xff908e8e)),
       );
     } else {
@@ -365,7 +365,7 @@ class _DilettaCreditCardState extends State<DilettaCreditCard>
           style: TextStyle(
             fontFamily: 'ocra',
             package: 'diletta_credit_card',
-            fontSize: size(11.0),
+            fontSize: size(12.0),
             color: Colors.white,
           ),
           overflow: TextOverflow.ellipsis);
@@ -388,7 +388,7 @@ class _DilettaCreditCardState extends State<DilettaCreditCard>
               style: TextStyle(
                   fontFamily: 'ocra',
                   package: 'diletta_credit_card',
-                  fontSize: size(12.0),
+                  fontSize: size(13.0),
                   color: _number.length > 0 ? Colors.white : Color(0xff3f3f3f)),
               children: [
                 TextSpan(
